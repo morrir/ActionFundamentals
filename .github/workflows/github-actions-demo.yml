@@ -16,8 +16,8 @@ workflow_dispatch:
         required: true
 
 jobs:
+  Build:
     runs-on: ubuntu-latest
-    if: 
     steps:
       - run: |
           echo "🎉 The job was triggered by event: ${{ github.event_name }}"
@@ -29,17 +29,15 @@ jobs:
         run: |
           echo "The repository ${{ github.repository }} contains the following files:"
           tree
-
-jobs:
- Test:
+Test:
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch'
     needs: Build
     environment: Test
     steps:
       - run: echo "🧪 Testing..."
-
-  Load-Test:
+      
+  load-Test:
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch'
     needs: Build
